@@ -1,0 +1,40 @@
+# Dossiers et fichiers générés par Visual Studio / .NET
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Packages NuGet
+packages/
+project.lock.json
+*.nuget.props
+*.nuget.targets
+
+# Configurations locales
+appsettings.Development.json
+
+# Logs et fichiers temporaires
+logs/
+*.log
+*.tlog
+*.cache
+*.pdb
+
+# Conteneurs et builds Docker
+**/Dockerfile
+**/docker-compose*
+
+# Dossiers spécifiques à Azure / Entity Framework
+.migrations/
+secrets/
+
+# Fichiers MacOS et Linux inutiles
+.DS_Store
+Thumbs.db
+
+# Fichiers de test et couverture de code
+TestResults/
+coverage/
