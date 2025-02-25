@@ -1,6 +1,7 @@
 ﻿using MVC.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MVC.Models
 {
@@ -35,10 +36,11 @@ namespace MVC.Models
 
     public class CommentCreateDTO
     {
+        [FromForm(Name = "Commentaire")]
         public string? Commentaire { get; init; }
-
+        [FromForm(Name = "User")]
         public string? User { get; init; }
-
+        [FromForm(Name = "PostId")]
         public required Guid PostId { get; init; }
 
         public static Comment GetComment(CommentCreateDTO comment)

@@ -92,6 +92,67 @@ app.MapGet("/Posts/{id}", async Task<IResult>(Guid id, IRepository_mini repo) =>
 }).WithName("GetPostById");
 
 
+
+
+
+
+// Route pour incrémenter le like d'un commentaire
+app.MapPost("/Comments/{commentId}/Like", async Task<IResult> (Guid commentId, IRepository_mini repo) =>
+{
+    var result = await repo.APlIncrementCommentLike(commentId);
+    return result;
+});
+
+// Route pour incrémenter le dislike d'un commentaire
+app.MapPost("/Comments/{commentId}/Dislike", async Task<IResult> (Guid commentId, IRepository_mini repo) =>
+{
+    var result = await repo.APlIncrementCommentDislike(commentId);
+    return result;
+});
+
+// Route pour incrémenter le like d'un post
+app.MapPost("/Posts/{postId}/Like", async Task<IResult> (Guid postId, IRepository_mini repo) =>
+{
+    var result = await repo.APlIncrementPostLike(postId);
+    return result;
+});
+
+// Route pour incrémenter le dislike d'un post
+app.MapPost("/Posts/{postId}/Dislike", async Task<IResult> (Guid postId, IRepository_mini repo) =>
+{
+    var result = await repo.APlIncrementPostDislike(postId);
+    return result;
+});
+
+// Route pour obtenir un commentaire spécifique
+app.MapGet("/Comments/{commentId}", async Task<IResult> (Guid commentId, IRepository_mini repo) =>
+{
+    var result = await repo.GetAPICcomment(commentId);
+    return result;
+});
+
+
+
+app.MapPost("/Comments/Add", async (IRepository_mini repo, [FromForm] CommentCreateDTO commentCreateDTO) =>
+{
+    try
+    {
+        // Créer un Comment à partir du DTO
+        var comment = CommentCreateDTO.GetComment(commentCreateDTO);
+
+        // Passer le Comment au repository pour création
+        var result = await repo.CreateAPICcomment(comment);
+
+        return result;
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.ToString());
+        return TypedResults.BadRequest();
+    }
+}).DisableAntiforgery();
+
+
 app.Run();
 
 
